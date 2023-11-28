@@ -14,8 +14,12 @@ test('should return a validation error when creating a new prediction with a sho
     await page.getByRole('link', { name: 'Create new entry' }).click();
     await page.getByPlaceholder('Please write something to').click();
     await page.getByPlaceholder('Please write something to').fill('This is a new test.');
+    await page.waitForTimeout(2000);
+
     await page.getByRole('button', { name: 'Save' }).click();
     
+    await page.waitForTimeout(2000);
+
     const error = await page.$('p[id="text-error"]');
     expect(error).toBeTruthy();
 })
@@ -27,7 +31,7 @@ test('should fill the MBTI field when creating a new prediction', async ({ page 
   await page.getByPlaceholder('Please write something to').fill('This is a new test. Write something to get a personality prediction.');
   await page.getByRole('button', { name: 'Save' }).click();
   
-  await page.waitForTimeout(3000);
+  await page.waitForTimeout(2000);
 
   const mbtiInput = await page.$('input[name="mbti"]');
   const isDisabled = await mbtiInput.isDisabled();
